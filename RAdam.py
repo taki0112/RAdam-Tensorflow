@@ -29,7 +29,6 @@ class RAdamOptimizer(optimizer.Optimizer):
         self._beta2 = beta2
         self._epsilon = epsilon
         self._weight_decay = weight_decay
-        self._initial_weight_decay = weight_decay
 
         self._lr_t = None
         self._step_t = None
@@ -99,8 +98,7 @@ class RAdamOptimizer(optimizer.Optimizer):
 
         var_t = tf.cond(sma_t >= 5.0, lambda : r_t * mhat_t / vhat_t, lambda : mhat_t)
 
-
-        if self._initial_weight_decay > 0.0:
+        if self._weight_decay > 0.0:
             var_t += math_ops.cast(self._weight_decay_t, var.dtype.base_dtype) * var
 
         var_update = state_ops.assign_sub(var, lr_t * var_t, use_locking=self._use_locking)
@@ -144,8 +142,7 @@ class RAdamOptimizer(optimizer.Optimizer):
 
         var_t = tf.cond(sma_t >= 5.0, lambda : r_t * mhat_t / vhat_t, lambda : mhat_t)
 
-
-        if self._initial_weight_decay > 0.0:
+        if self._weight_decay > 0.0:
             var_t += math_ops.cast(self._weight_decay_t, var.dtype.base_dtype) * var
 
         var_update = state_ops.assign_sub(var, lr_t * var_t, use_locking=self._use_locking)
