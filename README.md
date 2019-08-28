@@ -12,7 +12,7 @@ train_op = RAdamOptimizer(learning_rate=0.001, beta1=0.9, beta2=0.999, weight_de
 
 ## Algorithm
 <div align="center">
-  <img src="./assets/alg.png" height=400 width=600>
+  <img src="./assets/alg.png" height=417 width=687>
 </div>
 
 
