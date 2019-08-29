@@ -11,7 +11,7 @@ class RAdamOptimizer(optimizer.Optimizer):
 
     """
     RAdam optimizer : On The Variance Of The Adaptive Learning Rate And Beyond
-    https://arxiv.org/pdf/1908.03265v1.pdf.
+    https://arxiv.org/abs/1908.03265
     """
 
     def __init__(self,
