@@ -75,6 +75,7 @@ class RAdamOptimizer(optimizer.Optimizer):
 
     def _resource_apply_dense(self, grad, var):
         step, beta1_power, beta2_power = self._get_beta_accumulators()
+        step = math_ops.cast(step, var.dtype.base_dtype)
         beta1_power = math_ops.cast(beta1_power, var.dtype.base_dtype)
         beta2_power = math_ops.cast(beta2_power, var.dtype.base_dtype)
         lr_t = math_ops.cast(self._lr_t, var.dtype.base_dtype)
@@ -109,6 +110,7 @@ class RAdamOptimizer(optimizer.Optimizer):
 
     def _apply_sparse_shared(self, grad, var, indices, scatter_add):
         step, beta1_power, beta2_power = self._get_beta_accumulators()
+        step = math_ops.cast(step, var.dtype.base_dtype)
         beta1_power = math_ops.cast(beta1_power, var.dtype.base_dtype)
         beta2_power = math_ops.cast(beta2_power, var.dtype.base_dtype)
         lr_t = math_ops.cast(self._lr_t, var.dtype.base_dtype)
