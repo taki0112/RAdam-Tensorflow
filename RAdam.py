@@ -96,7 +96,7 @@ class RAdamOptimizer(optimizer.Optimizer):
 
         r_t = math_ops.sqrt( ((sma_t - 4.0) * (sma_t - 2.0) * sma_inf) / ((sma_inf - 4.0) * (sma_inf - 2.0) * sma_t) )
 
-        var_t = tf.cond(sma_t >= 5.0, lambda : r_t * mhat_t / vhat_t, lambda : mhat_t)
+        var_t = tf.cond(sma_t >= 5.0, lambda : r_t * mhat_t / (vhat_t + epsilon_t), lambda : mhat_t)
 
         if self._weight_decay > 0.0:
             var_t += math_ops.cast(self._weight_decay_t, var.dtype.base_dtype) * var
@@ -140,7 +140,7 @@ class RAdamOptimizer(optimizer.Optimizer):
 
         r_t = math_ops.sqrt( ((sma_t - 4.0) * (sma_t - 2.0) * sma_inf) / ((sma_inf - 4.0) * (sma_inf - 2.0) * sma_t) )
 
-        var_t = tf.cond(sma_t >= 5.0, lambda : r_t * mhat_t / vhat_t, lambda : mhat_t)
+        var_t = tf.cond(sma_t >= 5.0, lambda : r_t * mhat_t / (vhat_t + epsilon_t), lambda : mhat_t)
 
         if self._weight_decay > 0.0:
             var_t += math_ops.cast(self._weight_decay_t, var.dtype.base_dtype) * var
